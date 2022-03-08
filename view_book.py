@@ -22,8 +22,26 @@ def view_book():
     view_book_screen.minsize(width=400, height=400)
     view_book_screen.geometry('600x500')
 
+    # Take n greater than 0.25 and less than 5
+    same=True
+    n=0.25
+
+    #adding a background image
+    background_image =Image.open("./images/viewBooks.jpg")
+    [imageSizeWidth, imageSizeHeight] = background_image.size
+
+    newImageSizeWidth = int(imageSizeWidth*n)
+    if same:
+        newImageSizeHeight = int(imageSizeHeight*n)
+    else:
+        newImageSizeHeight = int(imageSizeHeight/n)
+
+    background_image = background_image.resize((newImageSizeWidth,newImageSizeHeight),Image.ANTIALIAS)
+    img = ImageTk.PhotoImage(background_image)
+
     view_book_canvas = Canvas(view_book_screen)
-    view_book_canvas.config(bg='#12a4d9')
+    view_book_canvas.create_image(300, 340, image=img)
+    view_book_canvas.config(bg='#12a4d9', width=newImageSizeWidth, height=newImageSizeHeight)
     view_book_canvas.pack(expand=True, fill=BOTH)
 
     headingFrame = Frame(view_book_screen, bg='#FFBB00', bd=5)
