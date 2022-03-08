@@ -26,9 +26,9 @@ pip install pymysql
 Python
 
 ### Libraries:
-Pymysql
-Pillow
-Tkinter
+* Tkinter
+* Pymysql
+* Pillow
 
 ### Platforms:
 * (https://pillow.readthedocs.io)
@@ -37,12 +37,12 @@ Tkinter
 
 ## Files:
 
-* main.py – which does function call to all other python files
-* AddBook.py – To add the book
-* ViewBooks.py – To View the list of books in the library
-* DeleteBook.py – To Delete a book from library
-* IssueBook.py – To Issue a book from library
-* ReturnBook.py – To Return a book to the library
+* main.py – Does the function call to all other python files.
+* AddBook.py – Add the book to db.
+* ViewBooks.py – Function to view the list of books in the library.
+* DeleteBook.py – Functin to delete a book from library.
+* IssueBook.py – Function to issue a book from library.
+* ReturnBook.py – Fuction to return a book to the library.
 
 
 ### Limitations of the system:
