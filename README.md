@@ -31,9 +31,9 @@ Pillow
 Tkinter
 
 ### Platforms:
-(https://pillow.readthedocs.io)
-(https://tkdocs.com)
-(https://pypi.org)
+* (https://pillow.readthedocs.io)
+* (https://tkdocs.com)
+* (https://pypi.org)
 
 ## Files:
 
@@ -45,7 +45,7 @@ Tkinter
 * ReturnBook.py – To Return a book to the library
 
 
-### Limitations of the s:
+### Limitations of the system:
 * Due to the simplistic nature of the system there are several limitations on what the BMS system can do, such as:
 * Only one user a/c
 * No user authentication
