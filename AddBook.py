@@ -96,3 +96,6 @@ def addBook():
     quitBtn.place(relx=0.53,rely=0.9, relwidth=0.18,relheight=0.08)
     
     add_book_screen.mainloop()
+
+    if __name__ == '__main__':
+        addBook()
