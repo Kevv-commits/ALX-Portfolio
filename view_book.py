@@ -56,5 +56,3 @@ def view_book():
 
     view_book_screen.mainloop()
 
-if __name__ == '__main__':
-    view_book()

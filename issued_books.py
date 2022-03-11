@@ -52,3 +52,4 @@ def issuedBook():
     quit_button.place(relx=0.4, rely=0.9, relwidth=0.18, relheight=0.08)
 
     issued_books_screen.mainloop()
+

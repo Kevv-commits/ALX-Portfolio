@@ -10,7 +10,6 @@ con = pymysql.connect(host='', user='', password=mypass, database>
 cur = con.cursor()
 
 #set tables to query
-
 issue_table = 'books_issued'
 book_table = 'books'
 
@@ -124,6 +123,3 @@ def issue_book():
     quit_button.place(relx=0.53,rely=0.9, relwidth=0.18,relheight=0.08)
 
     issue_book_screen.mainloop()
-
-if __name__ == '__main__':
-    issue_book()
