@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from PIL import ImageTk, Image
 import pymysql
 
 mypass = ""
@@ -17,11 +18,29 @@ def issuedBook():
     issued_books_screen.minsize(width=400, height=400)
     issued_books_screen.geometry("600x500")
 
+    same = True
+    n = .25
+
+    #add a background image
+    background_image = Image.open('./images/returnbook.jpg')
+    [imageSizeWidth, imageSizeHeight] = background_image.size
+
+    newImageSizeWidth = int(imageSizeWidth*n)
+    if same:
+        newImageSizeHeight = int(imageSizeHeight*n)
+    else:
+        newImageSizeHeigth = int(imageSizeHeight/n)
+
+    background_image = background_image.resize((newImageSizeWidth, newImageSizeHeight), Image.ANTIALIAS)
+    img = ImageTk.PhotoImage(background_image)
+
+
     issued_books_canvas = Canvas(issued_books_screen)
-    issued_books_canvas.config(bg="#12a4d9")
+    issued_books_canvas.create_image(300, 340, image=img)
+    issued_books_canvas.config(bg="#12a4d9", width=newImageSizeWidth, height=newImageSizeHeight)
     issued_books_canvas.pack(expand=True, fill=BOTH)
 
-    headingFrame = Frame(issued_books_screen, bg="#FFBB00", bd=5)
+    headingFrame = Frame(issued_books_screen, bg="#00ffff", bd=5)
     headingFrame.place(relx=0.25, rely=0.1, relwidth=0.5, relheight=0.13)
 
     headingLabel = Label(headingFrame, text="View Books",
@@ -47,7 +66,7 @@ def issuedBook():
     except:
         messagebox.showinfo("Failed to fetch files from database")
 
-    quit_button = Button(issued_books_screen, text="Quit", bg='#f7f1e3',
+    quit_button = Button(issued_books_screen, text="Quit", bg='#ff0000',
                      fg='black', command=issued_books_screen.destroy)
     quit_button.place(relx=0.4, rely=0.9, relwidth=0.18, relheight=0.08)
 

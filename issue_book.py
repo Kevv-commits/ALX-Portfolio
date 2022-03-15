@@ -87,11 +87,28 @@ def issue_book():
     issue_book_screen.minsize(width=400,height=400)
     issue_book_screen.geometry("600x500")
 
+    same = True
+    n = .25
+
+    #add a background image
+    background_image = Image.open('./images/issue.jpg')
+    [imageSizeWidth, imageSizeHeight] = background_image.size
+
+    newImageSizeWidth = int(imageSizeWidth*n)
+    if same:
+        newImageSizeHeight = int(imageSizeHeight*n)
+    else:
+        newImageSizeHeigth = int(imageSizeHeight/n)
+
+    background_image = background_image.resize((newImageSizeWidth, newImageSizeHeight), Image.ANTIALIAS)
+    img = ImageTk.PhotoImage(background_image)
+
     issue_book_canvas = Canvas(issue_book_screen)
-    issue_book_canvas.config(bg="#D6ED17")
+    issue_book_canvas.create_image(300, 340, image=img)
+    issue_book_canvas.config(bg="#D6ED17", width=newImageSizeWidth, height=newImageSizeHeight)
     issue_book_canvas.pack(expand=True,fill=BOTH)
 
-    headingFrame1 = Frame(issue_book_screen,bg="#FFBB00",bd=5)
+    headingFrame1 = Frame(issue_book_screen,bg="#00ffff",bd=5)
     headingFrame1.place(relx=0.25,rely=0.1,relwidth=0.5,relheight=0.13)
 
     headingLabel = Label(headingFrame1, text="Issue Book", bg='black', fg='white', font=('Courier',15))
@@ -119,7 +136,8 @@ def issue_book():
     issue_button = Button(issue_book_screen,text="Issue",bg='#d1ccc0', fg='black',command=issue)
     issue_button.place(relx=0.28,rely=0.9, relwidth=0.18,relheight=0.08)
 
-    quit_button = Button(issue_book_screen,text="Quit",bg='#aaa69d', fg='black', command=issue_book_screen.destroy)
+    quit_button = Button(issue_book_screen,text="Quit",bg='#ff0000', fg='black', command=issue_book_screen.destroy)
     quit_button.place(relx=0.53,rely=0.9, relwidth=0.18,relheight=0.08)
 
     issue_book_screen.mainloop()
+

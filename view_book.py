@@ -22,13 +22,28 @@ def view_book():
     view_book_screen.minsize(width=400, height=400)
     view_book_screen.geometry('600x500')
 
+    same = True
+    n = .25
 
+    #add a background image
+    background_image = Image.open('./images/issue.jpg')
+    [imageSizeWidth, imageSizeHeight] = background_image.size
+
+    newImageSizeWidth = int(imageSizeWidth*n)
+    if same:
+        newImageSizeHeight = int(imageSizeHeight*n)
+    else:
+        newImageSizeHeigth = int(imageSizeHeight/n)
+
+    background_image = background_image.resize((newImageSizeWidth, newImageSizeHeight), Image.ANTIALIAS)
+    img = ImageTk.PhotoImage(background_image)
 
     view_book_canvas = Canvas(view_book_screen)
-    view_book_canvas.config(bg='#12a4d9')
+    view_book_canvas.create_image(300, 340, image = img)
+    view_book_canvas.config(bg='#12a4d9', width=newImageSizeWidth, height=newImageSizeHeight)
     view_book_canvas.pack(expand=True, fill=BOTH)
 
-    headingFrame = Frame(view_book_screen, bg='#FFBB00', bd=5)
+    headingFrame = Frame(view_book_screen, bg='#00ffff', bd=5)
     headingFrame.place(relx=.25, rely=.1, relwidth=.5, relheight=.13)
 
     headingLabel = Label(headingFrame, text='View Books', bg='black', fg='white', font=('Courier', 15))
@@ -51,7 +66,7 @@ def view_book():
     except:
         messagebox.showinfo('Failed to fetch files from database')
 
-    quit_button = Button(view_book_screen, text='Quit', bg='#f7f1e3', fg='black', command=view_book_screen.destroy)
+    quit_button = Button(view_book_screen, text='Quit', bg='#ff0000', fg='black', command=view_book_screen.destroy)
     quit_button.place(relx=.4, rely=.9, relwidth=.18, relheight=.08)
 
     view_book_screen.mainloop()
