@@ -2,13 +2,11 @@ from tkinter import *
 from PIL import ImageTk,Image
 import pymysql
 from tkinter import messagebox
+import conn
 
 #setup a database connnection
-mypass = ""
-database_name = ""
-
-con = pymysql.connect(host='', user='', password=mypass, database=database_name)
-cur = con.cursor()
+con = conn.con
+cur = conn.cur
 
 #set table to query
 book_table = 'books'

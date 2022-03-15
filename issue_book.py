@@ -1,13 +1,11 @@
 import pymysql
 from PIL import ImageTk, Image
 from tkinter import *
+import conn
 
 #setup a database connnection
-mypass = ""
-database_name = ""
-
-con = pymysql.connect(host='', user='', password=mypass, database>
-cur = con.cursor()
+con = conn.con
+cur = conn.cur
 
 #set tables to query
 issue_table = 'books_issued'
@@ -17,6 +15,7 @@ bookIds = []
 
 def issue():
     """main function"""
+
     global issue_button,labelFrame,lb1,book_id,issue,quit_button,issue_book_screen,issue_book_canvas,status
 
     bid = book_id.get()

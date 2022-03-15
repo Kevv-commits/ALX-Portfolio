@@ -2,6 +2,7 @@ from tkinter import *
 from PIL import ImageTk,Image
 from tkinter import messagebox
 import pymysql
+import conn
 
 def bookRegister():
     """function executes an SQL command to insert data into the table
@@ -39,10 +40,9 @@ def addBook():
     add_book_screen.minsize(width=400,height=400)
     add_book_screen.geometry("600x500")
 
-    mypass = ""
-    database_name =""
-    con = pymysql.connect(host="",user="",password=mypass,database=database_name)
-    cur = con.cursor()
+    #setting up a db connection
+    con = conn.con
+    cur = conn.cur
 
     # Table Name
     bookTable = ""
