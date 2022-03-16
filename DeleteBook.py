@@ -38,18 +38,36 @@ def delete():
        fetch details of a book from the user and then call deleteBook() fun to 
        remove the book record from the table
     """
-    global bookInfo1,bookInfo2,bookInfo3,bookInfo4,Canvas1,con,cur,bookTable,root
+    global bookInfo1,bookInfo2,bookInfo3,bookInfo4,Canvas1,con,cur,bookTable,delete_book_screen
 
     delete_book_screen = Tk()
     delete_book_screen.title("Delete Book")
     delete_book_screen.minsize(width=400,height=400)
     delete_book_screen.geometry("600x500")
 
+    same = True
+    n = .25
+
+    #add a background image
+    background_image = Image.open('./images/lib.jpg')
+    [imageSizeWidth, imageSizeHeight] = background_image.size
+
+    newImageSizeWidth = int(imageSizeWidth*n)
+    if same:
+        newImageSizeHeight = int(imageSizeHeight*n)
+    else:
+        newImageSizeHeigth = int(imageSizeHeight/n)
+
+    background_image = background_image.resize((newImageSizeWidth, newImageSizeHeight), Image.ANTIALIAS)
+    img = ImageTk.PhotoImage(background_image)
+
+
     Canvas1 = Canvas(delete_book_screen)
-    Canvas1.config(bg="#006B38")
+    Canvas1.create_image(300, 340, image=img)
+    Canvas1.config(bg="#006B38", width=newImageSizeWidth, height=newImageSizeHeight)
     Canvas1.pack(expand=True,fill=BOTH)
 
-    headingFrame1 = Frame(delete_book_screen,bg="#FFBB00",bd=5)
+    headingFrame1 = Frame(delete_book_screen,bg="#00ffff",bd=5)
     headingFrame1.place(relx=0.25,rely=0.1,relwidth=0.5,relheight=0.13)
 
     headingLabel = Label(headingFrame1, text="Delete Book", bg='black', fg='white', font=('Courier',15))
@@ -70,8 +88,9 @@ def delete():
     SubmitBtn.place(relx=0.28,rely=0.9, relwidth=0.18,relheight=0.08)
 
     #quitBtn
-    quitBtn = Button(delete_book_screen,text="Quit",bg='#f7f1e3', fg='black', command=delete_book_screen.destroy)
+    quitBtn = Button(delete_book_screen,text="Quit",bg='#ff0000', fg='black', command=delete_book_screen.destroy)
     quitBtn.place(relx=0.53,rely=0.9, relwidth=0.18,relheight=0.08)
 
     delete_book_screen.mainloop()
+
 

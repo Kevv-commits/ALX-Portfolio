@@ -1,48 +1,48 @@
-import pymysql
-from PIL import ImageTk, Image
 from tkinter import *
+from PIL import ImageTk,Image
+from tkinter import messagebox
+import pymysql
 import conn
 
-#setup a database connnection
+# Add your own database name and password here to reflect in the code
 con = conn.con
 cur = conn.cur
+# Enter Table Names here
+issueTable = "books_issued"
+bookTable = "books"
 
-#set tables to query
-issue_table = 'books_issued'
-book_table = 'books'
-
+#List To store all Book IDs
 bookIds = []
 
 def issue():
-    """main function"""
 
-    global issue_button,labelFrame,lb1,book_id,issue,quit_button,issue_book_screen,issue_book_canvas,status
+    global issue_button,labelFrame,lb1,book_id,name,quit_button,issue_book_screen,issue_book_canvas,status
 
     bid = book_id.get()
-    issueto = issue.get()
+    issueto = name.get()
 
     issue_button.destroy()
     labelFrame.destroy()
     lb1.destroy()
     book_id.destroy()
-    issue.destroy()
+    name.destroy()
 
 
-    extractBid = "select bid from "+book_table
+    extractBid = "select bid from "+bookTable
     try:
         cur.execute(extractBid)
         con.commit()
         for i in cur:
             bookIds.append(i[0])
 
-        if bid in allBid:
-            availability = "select status from "+book_table+" where bid = '"+bid+"'"
-            cur.execute(availability)
+        if bid in bookIds:
+            checkAvail = "select status from "+bookTable+" where bid = '"+bid+"'"
+            cur.execute(checkAvail)
             con.commit()
             for i in cur:
                 check = i[0]
 
-            if check == 'avail':
+            if check == 'avail' or check == 'Avail':
                 status = True
             else:
                 status = False
@@ -52,10 +52,10 @@ def issue():
     except:
         messagebox.showinfo("Error","Can't fetch Book IDs")
 
-    issueSql = "insert into "+issue_table+" values ('"+bid+"','"+issueto+"')"
-    show = "select * from "+issue_table
+    issueSql = "insert into "+issueTable+" values ('"+bid+"','"+issueto+"')"
+    show = "select * from "+issueTable
 
-    updateStatus = "update "+book_table+" set status = 'issued' where bid = '"+bid+"'"
+    updateStatus = "update "+bookTable+" set status = 'issued' where bid = '"+bid+"'"
     try:
         if bid in bookIds and status == True:
             cur.execute(issueSql)
@@ -77,12 +77,12 @@ def issue():
 
     bookIds.clear()
 
-def issue_book():
-    """setting up the issue book gui window"""
-     global issue_button,labelFrame,lb1,book_id,issue,quit_button,issue_book_screen,issue_book_canvas,status
+def issueBook():
+
+    global issue_button,labelFrame,lb1,book_id,name,quit_button,issue_book_screen,issue_book_canvas,status
 
     issue_book_screen = Tk()
-    issue_book_screen.title("Issue Book")
+    issue_book_screen.title("Library")
     issue_book_screen.minsize(width=400,height=400)
     issue_book_screen.geometry("600x500")
 
@@ -102,6 +102,7 @@ def issue_book():
     background_image = background_image.resize((newImageSizeWidth, newImageSizeHeight), Image.ANTIALIAS)
     img = ImageTk.PhotoImage(background_image)
 
+
     issue_book_canvas = Canvas(issue_book_screen)
     issue_book_canvas.create_image(300, 340, image=img)
     issue_book_canvas.config(bg="#D6ED17", width=newImageSizeWidth, height=newImageSizeHeight)
@@ -114,7 +115,7 @@ def issue_book():
     headingLabel.place(relx=0,rely=0, relwidth=1, relheight=1)
 
     labelFrame = Frame(issue_book_screen,bg='black')
-    labelFrame.place(relx=0.1,rely=0.3,relwidth=0.8,relheight=0.5)  
+    labelFrame.place(relx=0.1,rely=0.3,relwidth=0.8,relheight=0.5)
 
     # Book ID
     lb1 = Label(labelFrame,text="Book ID : ", bg='black', fg='white')
@@ -127,9 +128,8 @@ def issue_book():
     lb2 = Label(labelFrame,text="Issued To : ", bg='black', fg='white')
     lb2.place(relx=0.05,rely=0.4)
 
-    issue = Entry(labelFrame)
-    issue.place(relx=0.3,rely=0.4, relwidth=0.62)
-
+    name = Entry(labelFrame)
+    name.place(relx=0.3,rely=0.4, relwidth=0.62)
 
     #Issue Button
     issue_button = Button(issue_book_screen,text="Issue",bg='#d1ccc0', fg='black',command=issue)

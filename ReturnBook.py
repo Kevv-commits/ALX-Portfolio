@@ -71,18 +71,35 @@ def returnBook():
     """create and place a headingFrame and an input field for taking input of the books’ ID
        create and add two buttons named SubmitBtn and quitBtn
     """
-    global bookInfo1,SubmitBtn,quitBtn,Canvas1,con,cur,root,labelFrame, lb1
+    global bookInfo1,SubmitBtn,quitBtn,Canvas1,con,cur,return_book_screen,labelFrame, lb1
 
     return_book_screen = Tk()
     return_book_screen.title("Return Book")
     return_book_screen.minsize(width=400,height=400)
     return_book_screen.geometry("600x500")
-    Canvas1 = Canvas(return_book_screen)
 
-    Canvas1.config(bg="#006B38")
+    same = True
+    n = .25
+
+    #add a background image
+    background_image = Image.open('./images/viewbook.jpg')
+    [imageSizeWidth, imageSizeHeight] = background_image.size
+
+    newImageSizeWidth = int(imageSizeWidth*n)
+    if same:
+        newImageSizeHeight = int(imageSizeHeight*n)
+    else:
+        newImageSizeHeigth = int(imageSizeHeight/n)
+
+    background_image = background_image.resize((newImageSizeWidth, newImageSizeHeight), Image.ANTIALIAS)
+    img = ImageTk.PhotoImage(background_image)
+
+    Canvas1 = Canvas(return_book_screen)
+    Canvas1.create_image(300, 340, image=img)
+    Canvas1.config(bg="#006B38", width=newImageSizeWidth, height=newImageSizeHeight)
     Canvas1.pack(expand=True,fill=BOTH)
 
-    headingFrame1 = Frame(return_book_screen,bg="#FFBB00",bd=5)
+    headingFrame1 = Frame(return_book_screen,bg="#00ffff",bd=5)
     headingFrame1.place(relx=0.25,rely=0.1,relwidth=0.5,relheight=0.13)
 
     headingLabel = Label(headingFrame1, text="Return Book", bg='black', fg='white', font=('Courier',15))
@@ -102,7 +119,7 @@ def returnBook():
     SubmitBtn = Button(return_book_screen,text="Return",bg='#d1ccc0', fg='black',command=returnn)
     SubmitBtn.place(relx=0.28,rely=0.9, relwidth=0.18,relheight=0.08)
 
-    quitBtn = Button(return_book_screen,text="Quit",bg='#f7f1e3', fg='black', command=return_book_screen.destroy)
+    quitBtn = Button(return_book_screen,text="Quit",bg='#ff0000', fg='black', command=return_book_screen.destroy)
     quitBtn.place(relx=0.53,rely=0.9, relwidth=0.18,relheight=0.08)
 
     return_book_screen.mainloop()
