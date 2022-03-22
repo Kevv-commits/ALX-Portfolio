@@ -49,19 +49,19 @@ headingLabel.place(relx=0,rely=0, relwidth=1, relheight=1)
 btn1 = Button(mainWindow,text="Add Book Details",bg='black', fg='white', command=addBook)
 btn1.place(relx=0.28,rely=0.3, relwidth=0.45,relheight=0.1)
 
-btn2 = Button(mainWindow,text="Delete Book",bg='black', fg='white', command=deleteBook)
+btn2 = Button(mainWindow,text="Delete Book",bg='black', fg='white', command=delete)
 btn2.place(relx=0.28,rely=0.4, relwidth=0.45,relheight=0.1)
 
 btn3 = Button(mainWindow,text="View Book List",bg='black', fg='white', command=view_book)
 btn3.place(relx=0.28,rely=0.5, relwidth=0.45,relheight=0.1)
 
-btn4 = Button(mainWindow,text="Issue Book to Student",bg='black', fg='white', command = issue)
+btn4 = Button(mainWindow,text="Issue Book to Student",bg='black', fg='white', command = issueBook)
 btn4.place(relx=0.28,rely=0.6, relwidth=0.45,relheight=0.1)
 
 btn5 = Button(mainWindow, text="Issued Books", bg='black', fg='white', command= issuedBook)
 btn5.place(relx=0.28, rely=0.7, relwidth=0.45, relheight=0.1)
 
-btn6 = Button(mainWindow,text="Return Book",bg='black', fg='white', command = returnn)
+btn6 = Button(mainWindow,text="Return Book",bg='black', fg='white', command = returnBook)
 btn6.place(relx=0.28,rely=0.8, relwidth=0.45,relheight=0.1)
 
 quit_button = Button(mainWindow, text="Quit", bg='#FF0000',
